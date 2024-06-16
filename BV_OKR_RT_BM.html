@@ -1,0 +1,488 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@400;600&display=swap');
+
+    #chartdiv {
+        width: 100%;
+        height: 95vh;
+    }
+
+    .am5font {
+        font-family: 'Oxanium', sans-serif;
+    }
+
+    body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.color-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-block {
+    width: 150px;
+    height: 40px;
+    margin: 8px 0;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+}
+
+#startColor {
+    background-color: #FA2A55;
+}
+
+#midColor {
+    background-color: #00FFB2;
+}
+
+#advancedColor {
+    background-color: #00ff9d;
+}
+
+#intermediateColor {
+    background-color: #FFB200;
+}
+
+
+</style>
+
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/hierarchy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<script>
+    am5.ready(function() {
+
+        var startColor = "#FA2A55";
+        var midColor = "#FFB200";
+        var advancedColor = "#00ff9d";
+        var intermediateColor = "#00FFB2";
+
+        var root = am5.Root.new("chartdiv");
+
+        var mainTheme = am5.Theme.new(root);
+
+        
+
+        mainTheme.rule("Polygon", ["hierarchy", "node", "shape", "depth0"]).setAll({
+            strokeOpacity: 0,
+            fillOpacity: 0
+        });
+
+        mainTheme.rule("Polygon", ["hierarchy", "node", "shape", "depth1"]).setAll({
+            strokeWidth: 5,
+            fillOpacity: 1,
+            stroke: am5.color(0x000000)
+        });
+
+        mainTheme.rule("Polygon", ["hierarchy", "node", "shape", "depth2"]).setAll({
+            fillOpacity: 0,
+            strokeWidth: 2,
+
+            stroke: am5.color(0x000000),
+
+        });
+
+        mainTheme.rule("HierarchyNode", ["last"]).setAll({
+            cursorOverStyle: "pointer"
+        });
+
+        mainTheme.rule("Label", ["node"]).setAll({
+            fontSize: 11,
+            minScale: 0.7,
+            stroke: am5.color(0x000000),
+            fill: am5.color(0x000000),
+            maxWidth: 100,
+            wrap: true,
+            textAlign: "center",
+            fontFamily: "Oxanium"
+        });
+
+        mainTheme.rule("Label", ["node", "depth0"]).setAll({
+            fill: am5.color(0x000000),
+            forceHidden: true
+        });
+
+        mainTheme.rule("Label", ["node", "depth1"]).setAll({
+            fill: am5.color(0x000000),
+            forceHidden: true
+        });
+
+        root.setThemes([
+            am5themes_Animated.new(root),
+            mainTheme
+        ]);
+
+        var data = {
+            "children": [
+                {
+                    "name": "Technology",
+                    "color": am5.color(0x000000),
+                    "fill": am5.color(0x000000),
+                    "children": [
+                        {
+                            "name": "[bold]Unlock a new\n cognitive dimension",
+                            "progress": 70,
+                            "Priority": 100
+                        },
+                        {
+                            "name": "[bold]Improve our\n F2B model by 25%",
+                            "progress": 80,
+                            "Priority": 30
+                        },
+                        {
+                            "name": "[bold]Improve BrainStudio\n by adding 3 main features",
+                            "progress": 100,
+                            "Priority": 30
+                        },
+                        {
+                            "name": "[bold]Using Existing\n MRI Scans to build Audiences",
+                            "progress": 10,
+                            "Priority": 50
+                        }, 
+                        {
+                            "name": "[bold]Building Novel\n Brain-Multi Modality",
+                            "progress": 10,
+                            "Priority": 70
+                        }
+                    ]
+                },
+                {
+                    "name": "Product",
+                    "color": am5.color(0x000000),
+                    "fill": am5.color(0x000000),
+                    "children": [
+                        {
+                            "name": "[bold]BrainOS Mock",
+                            "progress": 100,
+                            "Priority": 50
+                        },
+                        {
+                            "name": "[bold]Define a \nspec for BrainOS",
+                            "progress": 20,
+                            "Priority": 40
+                        },
+                        {
+                            "name": "[bold]Brain \nCollection MVP",
+                            "progress": 20,
+                            "Priority": 50
+                        }
+                    ]
+                },
+                {
+                    "name": "Partnerships",
+                    "color": am5.color(0x000000),
+                    "fill": am5.color(0x000000),
+                    "children": [
+                        {
+                            "name": "[bold]Scan \nnew Masterminds",
+                            "progress": 100,
+                            "Priority": 100
+                        },
+                        {
+                            "name": "[bold]Add 1 new generative \ncapability for \nat least one expert",
+                            "progress": 100,
+                            "Priority": 70
+                        },
+                          {
+                            "name": "[bold]Increase pipeline\n automation by 25%",
+                            "progress": 80,
+                            "Priority": 70
+                        }
+                    ]
+                },
+                {
+                    "name": "Marketing",
+                    "color": am5.color(0x000000),
+                    "fill": am5.color(0x000000),
+                    "children": [
+                        {
+                            "name": "[bold]Publish a weekly post",
+                            "progress": 20,
+                            "Priority": 50
+                        },
+                        {
+                            "name": "[bold]Participate \nin one \nrelevant conference\n or a podcast",
+                            "progress": 20,
+                            "Priority": 60
+                        },
+                        {
+                            "name": "[bold]Increase \nAdvisory board \nwith one expert in \nthe field",
+                            "progress": 10,
+                            "Priority": 100
+                        },
+                        {
+                            "name": "[bold]Complete writing\n our white paper",
+                            "progress": 70,
+                            "Priority": 80
+                        },
+                        {
+                            "name": "[bold]Redefine our \nbrand values",
+                            "progress": 20,
+                            "Priority": 100
+                        }
+                    ]
+                },
+                {
+                    "name": "Team",
+                    "color": am5.color(0x000000),
+                    "fill": am5.color(0x000000),
+                    "children": [
+                        {
+                            "name": "[bold]Reduce Time \nto Brain \n(TTB) by 25%",
+                            "progress": 70,
+                            "Priority": 100
+                        },
+                        {
+                            "name": "[bold]Increase team \ncollaboration \nscores by 20%",
+                            "progress": 70,
+                            "Priority": 100
+                        },
+                        {
+                            "name": "[bold]lead \nwith context \nmethodologies ",
+                            "progress": 40,
+                            "Priority": 100
+                        }
+                      
+                    ]
+                }
+            ]
+        }
+
+        var zoomableContainer = root.container.children.push(
+            am5.ZoomableContainer.new(root, {
+                width: am5.p100,
+                height: am5.p100,
+                wheelable: true,
+                pinchZoom: true
+            })
+        );
+
+        var zoomTools = zoomableContainer.children.push(am5.ZoomTools.new(root, {
+            target: zoomableContainer
+        }));
+
+        var series = zoomableContainer.contents.children.push(am5hierarchy.VoronoiTreemap.new(root, {
+            paddingLeft: 5,
+            paddingRight: 5,
+            paddingTop: 5,
+            paddingBottom: 5,
+            singleBranchOnly: true,
+            downDepth: 2,
+            upDepth: 0,
+            initialDepth: 2,
+            valueField: "Priority",
+            categoryField: "name",
+            childDataField: "children",
+            idField: "name",
+            name: "Series",
+            type: "polygon",
+            cornerCount: 120
+        }));
+
+
+        series.labels.template.adapters.add("x", function (x, target) {
+            var dataItem = target.dataItem;
+            var priority = dataItem.dataContext.Priority;
+        var modifiedPriority = priority / 10;  // Divide the Priority value by 10
+
+            if (dataItem) {
+                var polygon = dataItem.get("polygon");
+                if (polygon) {
+                    var minX = polygon.getPrivate("minX", 0);
+                    var maxX = polygon.getPrivate("maxX", 0);
+                    var dataContext = dataItem.dataContext;
+
+                    if (dataContext) {
+                        if (maxX - minX < 150) {
+                            target.set("text", dataContext.name.slice(0, 18) + "...");
+                        } else {
+                            target.set("text", dataContext.name);
+                        }
+                    }
+
+                }
+            }
+            return x;
+        });
+
+        series.polygons.template.adapters.add("x", function (x, target) {
+            var dataItem = target.dataItem;
+            target.set("fill", getColor(dataItem.dataContext.progress))
+            console.log(dataItem)
+        }); // by removing - you get the defalt colors
+
+
+
+// Adapter to dynamically set the stroke color to match the fill color
+series.polygons.template.adapters.add("stroke", function(stroke, target) {
+    var dataItem = target.dataItem;
+    if (dataItem && dataItem.dataContext && dataItem.dataContext.color) {
+        return "color"; 
+    }
+    return stroke;
+});
+
+
+        
+
+        series.labels.template.setAll({
+            fontSize: 11,
+            minScale: 0.7,
+            stroke: am5.color(0x000000),
+            fill: am5.color(0x000000),
+            maxWidth: 100,
+            wrap: true,
+            textAlign: "center",
+            fontFamily: "Oxanium",
+            fontWeight: 500,
+        });
+
+        series.nodes.template.events.on("click", function (e) {
+            var dataItem = e.target.dataItem;
+            if (dataItem) {
+                if (!dataItem.get("children")) {
+                    series.selectDataItem(dataItem.get("parent"));
+                }
+            }
+        });
+
+
+series.nodes.template.set("tooltipText", "{name}: \nProgress {progress}% \n Priority {Priority}");
+
+       
+
+         function getColor(progress) {
+            if (progress < 10) {
+                return startColor10;
+            } else if (progress <= 20) {
+                return startColor20;
+            } else if (progress <= 30) {
+                return startColor30;
+            } else if (progress <= 40) {
+                return startColor40;
+            } else if (progress <= 50) {
+                return startColor50;
+            } else if (progress <= 60) {
+                return startColor60;
+            } else if (progress <= 70) {
+                return startColor70;
+            } else if (progress <= 80) {
+                return startColor80;
+            } else if (progress <= 90) {
+                return startColor90;
+            } else if (progress <= 100) {
+                return startColor100;
+            } else {
+                return advancedColor;
+            }
+        }
+
+        series.data.setAll([data]);
+        
+       
+
+        var legend = zoomableContainer.children.push(am5.Legend.new(root, {
+            layout: root.verticalLayout,
+            fillField: "fill",
+            nameField: "name",
+            strokeField: "color",
+        }));
+     
+
+       
+
+        legend.itemContainers.template.setup = function (item) {
+            item.events.disableType("click");
+                };
+
+
+        legend.valueLabels.template.set("forceHidden", true);
+    
+
+        legend.itemContainers.template.setAll({
+            background: am5.Rectangle.new(root, {
+                fill: startColor,
+                fillOpacity: 1
+            })
+        });
+
+        series.events.on("datavalidated", function () {
+            series.dataItems.forEach(function (dataItem, index) {
+                var polygon = dataItem.get("polygon");
+                if (polygon) {
+                    var minX = polygon.getPrivate("minX", 0);
+                    var maxX = polygon.getPrivate("maxX", 0);
+                    var minY = polygon.getPrivate("minY", 0);
+                    var centroid = [(minX + maxX) / 2, minY];
+
+                    var legendItem = legend.dataItems[index];
+                    if (legendItem) {
+                        legendItem.set("x", centroid[0] + 10);
+                        legendItem.set("y", centroid[1] + 10);
+
+                        var line = zoomableContainer.children.push(am5.Line.new(root, {
+                            x1: centroid[0],
+                            y1: centroid[1],
+                            x2: centroid[0] + 10,
+                            y2: centroid[1] + 10,
+                            stroke: am5.color(0x000000),
+                            strokeWidth: 1
+                        }));
+                       
+                    }
+                }
+            });
+        });
+
+
+     
+
+legend.data.setAll(series.dataItems[0].get("children"));
+    });
+
+    
+</script>
+
+<script>
+var startColor10 = "#FA2A55";
+var startColor20 = "#F94F5B";
+var startColor30 = "#F77360";
+var startColor40 = "#F49766";
+var startColor50 = "#F2BA6B";
+var startColor60 = "#F0DE70";
+var startColor70 = "#ADF283";
+var startColor80 = "#82E799";
+var startColor90 = "#57DCAF";
+var startColor100 = "#00FFB2";
+//var startColor = "#FA2A55";
+//var midColor = "#FFB200";
+//var advancedColor = "#00ff9d";
+//var intermediateColor = "#00FFB2";
+
+document.getElementById("startColor").style.backgroundColor = startColor;
+document.getElementById("midColor").style.backgroundColor = midColor;
+document.getElementById("advancedColor").style.backgroundColor = advancedColor;
+document.getElementById("intermediateColor").style.backgroundColor = intermediateColor;
+</script>
+
+<div id="chartdiv"></div>
+<div class="color-map">
+    <div class="color-block" id="startColor">Start</div>
+    <div class="color-block" id="intermediateColor">Intermediate</div>
+    <div class="color-block" id="midColor">Getting There</div>
+    <div class="color-block" id="advancedColor">Done</div>
+</div>
